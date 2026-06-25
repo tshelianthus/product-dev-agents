@@ -1,8 +1,8 @@
 # Product Dev Agents
 
-Product Dev Agents is a contract-driven Codex skill bundle designed specifically as a set of skill files for Codex (a specific AI programming environment). Unlike general-purpose multi-agent frameworks (such as AutoGen or CrewAI) that can be independently deployed and extended, this project is a narrow-scope skill bundle meant to orchestrate workflows within a Codex session.
+Product Dev Agents is a contract-driven skill bundle. Unlike general-purpose multi-agent frameworks (such as AutoGen or CrewAI) that can be independently deployed and extended, this project is a narrow-scope skill bundle meant to orchestrate workflows within supported environments.
 
-It supports dual-mode execution for Codex:
+It supports dual-mode execution:
 - **Default Inline**: read each skill's `SKILL.md` in the current session. This works in environments without Subagent or Task support.
 - **Optional Subagent**: pass `execution_mode: subagent` to run eligible layers as Task subagents. If Task is unavailable, the bus records `TOOL_UNAVAILABLE`, falls back to Inline, and sets `bus_output.execution_mode_used: inline-fallback`.
 
@@ -131,7 +131,7 @@ flowchart TD
 
 ## Usage
 
-Copy or keep this folder where Codex can load skills, then invoke the main bus for product-development work:
+Copy or keep this folder where the skill runner can load skills, then invoke the main bus for product-development work:
 
 ```yaml
 intent: "YOUR_FEATURE_REQUEST"
@@ -147,7 +147,7 @@ intent: "YOUR_FEATURE_REQUEST"
 execution_mode: subagent
 ```
 
-The default is intentionally Inline so the repository remains compatible with plain Codex sessions and other skill runners.
+The default is intentionally Inline so the repository remains compatible with plain sessions and other skill runners.
 
 ## Project Context
 

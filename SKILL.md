@@ -1,6 +1,6 @@
 ---
 name: product-dev-agents
-description: A Codex skill bundle for product development orchestration. Supports Inline (default) and optional Subagent modes for coordinating cross-layer workflows (architect, pm, data, backend, qa, frontend).
+description: A skill bundle for product development orchestration. Supports Inline (default) and optional Subagent modes for coordinating cross-layer workflows (architect, pm, data, backend, qa, frontend).
 ---
 
 # Product Dev Agents — Orchestration Bus
