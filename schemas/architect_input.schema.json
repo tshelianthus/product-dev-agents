@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/architect_input.schema.json",
+  "title": "Architect Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["project_name", "project_type"],
+  "properties": {
+    "project_name": { "type": "string", "minLength": 1 },
+    "project_type": { "type": "string", "minLength": 1 },
+    "tech_stack": { "type": "object" },
+    "ci_platform": { "type": "string" },
+    "existing_repo": { "type": "boolean" },
+    "context_schema_version": { "type": "string" }
+  }
+}

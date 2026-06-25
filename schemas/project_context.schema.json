@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/project_context.schema.json",
+  "title": "Project Context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tech_stack",
+    "conventions",
+    "toolchain",
+    "ci",
+    "repo",
+    "runtime",
+    "quality_gates",
+    "issues"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.1" },
+    "tech_stack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "backend_framework",
+        "frontend_framework",
+        "database",
+        "migration_tool",
+        "package_manager"
+      ],
+      "properties": {
+        "language": { "type": "string" },
+        "backend_framework": { "type": "string" },
+        "frontend_framework": { "type": "string" },
+        "database": { "type": "string" },
+        "migration_tool": { "type": "string" },
+        "package_manager": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["backend", "frontend"],
+          "properties": {
+            "backend": { "type": "string" },
+            "frontend": { "type": "string" }
+          }
+        }
+      }
+    },
+    "conventions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["naming", "api", "commit"],
+      "properties": {
+        "naming": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "api_path_style",
+            "db_object_style",
+            "component_style",
+            "error_code_style"
+          ],
+          "properties": {
+            "api_path_style": { "type": "string" },
+            "db_object_style": { "type": "string" },
+            "component_style": { "type": "string" },
+            "error_code_style": { "type": "string" }
+          }
+        },
+        "api": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version_prefix", "contract_source"],
+          "properties": {
+            "version_prefix": { "type": "string" },
+            "contract_source": { "type": "string" }
+          }
+        },
+        "commit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["format"],
+          "properties": {
+            "format": { "type": "string" }
+          }
+        }
+      }
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lint", "test", "build", "typecheck", "migrate"],
+      "properties": {
+        "lint": { "$ref": "#/$defs/commandGroups" },
+        "test": { "$ref": "#/$defs/commandGroups" },
+        "build": { "$ref": "#/$defs/commandGroups" },
+        "typecheck": { "$ref": "#/$defs/commandGroups" },
+        "migrate": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "ci": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "pipeline_path"],
+      "properties": {
+        "platform": { "type": "string" },
+        "pipeline_path": { "type": "string" }
+      }
+    },
+    "repo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layout",
+        "api_contract_paths",
+        "migration_paths",
+        "test_paths",
+        "generated_code_policy"
+      ],
+      "properties": {
+        "layout": { "type": "object", "additionalProperties": { "type": "string" } },
+        "api_contract_paths": { "type": "array", "items": { "type": "string" } },
+        "migration_paths": { "type": "array", "items": { "type": "string" } },
+        "test_paths": { "type": "array", "items": { "type": "string" } },
+        "generated_code_policy": { "type": "string" }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "auth_model",
+        "tenancy_model",
+        "environment_policy",
+        "deployment_target",
+        "observability",
+        "feature_flag_policy"
+      ],
+      "properties": {
+        "auth_model": { "type": "string" },
+        "tenancy_model": { "type": "string" },
+        "environment_policy": { "type": "string" },
+        "deployment_target": { "type": "string" },
+        "observability": { "type": "string" },
+        "feature_flag_policy": { "type": "string" }
+      }
+    },
+    "quality_gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_before_summary"],
+      "properties": {
+        "required_before_summary": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": { "$ref": "issue.schema.json" }
+    }
+  },
+  "$defs": {
+    "commandGroups": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend", "frontend"],
+      "properties": {
+        "backend": { "type": "array", "items": { "type": "string" } },
+        "frontend": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

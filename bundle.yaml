@@ -1,0 +1,5 @@
+name: product-dev-agents
+schema_version: "1.1"
+bundle_version: "0.2.0"
+compatible_context_schema_versions:
+  - "1.1"

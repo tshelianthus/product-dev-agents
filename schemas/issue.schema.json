@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/issue.schema.json",
+  "title": "Product Dev Agents Issue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "code", "severity", "message", "blocking", "owner", "action", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable issue identifier for this orchestration run."
+    },
+    "code": {
+      "type": "string",
+      "enum": [
+        "CTX_MISSING",
+        "TOOL_UNAVAILABLE",
+        "UPSTREAM_INCOMPLETE",
+        "CONTRACT_MISMATCH",
+        "BLOCKED_BY_CONFLICT"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["warning", "error"]
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "owner": {
+      "type": "string",
+      "enum": [
+        "product-dev-agents",
+        "pm-agent",
+        "data-agent",
+        "backend-agent",
+        "frontend-agent",
+        "qa-agent",
+        "architect-agent",
+        "github-safety",
+        "backend-security",
+        "api-contract-principles"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "accepted", "resolved", "superseded"]
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "product-dev-agents",
+          "pm-agent",
+          "data-agent",
+          "backend-agent",
+          "frontend-agent",
+          "qa-agent",
+          "architect-agent"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "related_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "kind": { "type": "string" }
+        }
+      }
+    },
+    "resolution": {
+      "type": "string"
+    },
+    "accepted_by": {
+      "type": "string"
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

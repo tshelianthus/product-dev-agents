@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/data_dispatch.schema.json",
+  "title": "Data Dispatch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_card", "project_context", "entities", "query_paths", "constraints"],
+  "properties": {
+    "task_card": { "type": "object" },
+    "project_context": { "$ref": "project_context.schema.json" },
+    "entities": { "type": "array", "items": { "type": "object" } },
+    "query_paths": { "type": "array", "items": { "type": "string" } },
+    "constraints": { "type": "object" }
+  }
+}

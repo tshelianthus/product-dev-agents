@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/qa_input.schema.json",
+  "title": "QA Agent Input",
+  "$ref": "qa_dispatch.schema.json"
+}

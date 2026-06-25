@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/bus_output.schema.json",
+  "title": "Bus Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "context_schema_version",
+    "execution_mode_used",
+    "scene_detected",
+    "agents_activated",
+    "agents_skipped",
+    "final_summary",
+    "pm_summary_ref",
+    "artifacts",
+    "handoff",
+    "issues",
+    "run_state"
+  ],
+  "properties": {
+    "context_schema_version": { "type": "string" },
+    "execution_mode_used": {
+      "type": "string",
+      "enum": ["inline", "subagent", "inline-fallback"]
+    },
+    "scene_detected": {
+      "type": "string",
+      "enum": [
+        "new-project",
+        "new-feature",
+        "bug-fix",
+        "review",
+        "frontend-only",
+        "unclassified",
+        "manual-target_agents"
+      ]
+    },
+    "agents_activated": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "agents_skipped": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["agent", "reason"],
+        "properties": {
+          "agent": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "final_summary": { "type": "string" },
+    "pm_summary_ref": { "type": "string" },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/artifact" }
+    },
+    "handoff": { "$ref": "common.schema.json#/$defs/handoff" },
+    "subagent_runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["agent", "status", "task_id"],
+        "properties": {
+          "agent": { "type": "string" },
+          "status": { "type": "string" },
+          "task_id": { "type": "string" }
+        }
+      }
+    },
+    "run_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "agent_states"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["pending", "running", "completed", "blocked", "failed", "needs_user_input"]
+        },
+        "agent_states": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "enum": ["pending", "running", "skipped", "completed", "blocked", "failed", "needs_user_input"]
+          }
+        }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": { "$ref": "issue.schema.json" }
+    }
+  }
+}

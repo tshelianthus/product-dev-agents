@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/pm_output.schema.json",
+  "title": "PM Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_card",
+    "plan",
+    "execution_mode_used",
+    "context_schema_version_used",
+    "dispatches",
+    "summary",
+    "handoff",
+    "issues"
+  ],
+  "properties": {
+    "task_card": { "type": "object" },
+    "plan": { "type": "object" },
+    "execution_mode_used": {
+      "type": "string",
+      "enum": ["inline", "subagent", "inline-fallback"]
+    },
+    "context_schema_version_used": { "type": "string" },
+    "dispatches": { "$ref": "dispatches.schema.json" },
+    "summary": { "type": "string" },
+    "handoff": { "$ref": "common.schema.json#/$defs/handoff" },
+    "issues": {
+      "type": "array",
+      "items": { "$ref": "issue.schema.json" }
+    }
+  }
+}

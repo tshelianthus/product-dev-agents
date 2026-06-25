@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/common.schema.json",
+  "title": "Product Dev Agents Common Definitions",
+  "$defs": {
+    "handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["next_agent", "required_inputs"],
+      "properties": {
+        "next_agent": { "type": "string" },
+        "required_inputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "kind"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "minLength": 1 }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": ["contract_version", "updated_at"],
+      "properties": {
+        "contract_version": {
+          "oneOf": [{ "type": "string" }, { "type": "integer" }]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "openObject": {
+      "type": "object"
+    }
+  }
+}

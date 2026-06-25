@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/dispatches.schema.json",
+  "title": "Dispatches",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "data": { "$ref": "data_dispatch.schema.json" },
+    "backend": { "$ref": "backend_dispatch.schema.json" },
+    "frontend": { "$ref": "frontend_dispatch.schema.json" },
+    "qa": { "$ref": "qa_dispatch.schema.json" }
+  }
+}

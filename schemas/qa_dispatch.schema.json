@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/qa_dispatch.schema.json",
+  "title": "QA Dispatch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_card",
+    "project_context",
+    "api_contract",
+    "perf_targets",
+    "scope"
+  ],
+  "properties": {
+    "task_card": { "type": "object" },
+    "project_context": { "$ref": "project_context.schema.json" },
+    "api_contract": { "$ref": "common.schema.json#/$defs/contract" },
+    "data_contract": { "$ref": "common.schema.json#/$defs/contract" },
+    "perf_targets": { "type": "object" },
+    "scope": {
+      "type": "string",
+      "enum": ["full", "functional-only", "perf-only", "e2e", "e2e-only"]
+    }
+  }
+}

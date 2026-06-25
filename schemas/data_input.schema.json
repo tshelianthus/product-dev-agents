@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/data_input.schema.json",
+  "title": "Data Agent Input",
+  "$ref": "data_dispatch.schema.json"
+}

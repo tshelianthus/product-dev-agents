@@ -1,0 +1,110 @@
+schema_version: "1.1"
+
+agents:
+  architect-agent:
+    path: architect-agent/SKILL.md
+    role: project-initialization
+    input_schema: schemas/architect_input.schema.json
+    output_schema: schemas/architect_output.schema.json
+    depends_on: []
+    consumes: []
+    produces:
+      - project_context
+    daily_runtime: false
+
+  pm-agent:
+    path: pm-agent/SKILL.md
+    role: product-coordination
+    input_schema: schemas/pm_input.schema.json
+    output_schema: schemas/pm_output.schema.json
+    depends_on: []
+    consumes:
+      - project_context
+      - user_intent
+    produces:
+      - task_card
+      - dispatches
+      - pm_summary
+    daily_runtime: true
+
+  data-agent:
+    path: data-agent/SKILL.md
+    role: data-contract
+    input_schema: schemas/data_input.schema.json
+    output_schema: schemas/data_output.schema.json
+    depends_on:
+      - pm-agent
+    consumes:
+      - task_card
+      - project_context
+    produces:
+      - data_contract
+    daily_runtime: true
+
+  backend-agent:
+    path: backend-agent/SKILL.md
+    role: api-contract-and-backend-logic
+    input_schema: schemas/backend_input.schema.json
+    output_schema: schemas/backend_output.schema.json
+    depends_on:
+      - pm-agent
+      - data-agent
+    consumes:
+      - task_card
+      - project_context
+      - data_contract
+    produces:
+      - api_contract
+    daily_runtime: true
+
+  qa-agent:
+    path: qa-agent/SKILL.md
+    role: quality-gates
+    input_schema: schemas/qa_input.schema.json
+    output_schema: schemas/qa_output.schema.json
+    depends_on:
+      - pm-agent
+      - backend-agent
+    consumes:
+      - task_card
+      - project_context
+      - api_contract
+      - data_contract
+    produces:
+      - qa_output
+    daily_runtime: true
+    may_run_parallel_with:
+      - frontend-agent
+
+  frontend-agent:
+    path: frontend-agent/SKILL.md
+    role: ui-and-api-binding
+    input_schema: schemas/frontend_input.schema.json
+    output_schema: schemas/frontend_output.schema.json
+    depends_on:
+      - pm-agent
+      - backend-agent
+    consumes:
+      - task_card
+      - project_context
+      - api_contract
+    produces:
+      - frontend_output
+    daily_runtime: true
+    may_run_parallel_with:
+      - qa-agent
+
+quality_gates:
+  integration-check:
+    after:
+      - qa-agent
+      - frontend-agent
+    required_when:
+      - qa-agent activated
+      - frontend-agent activated
+    checks:
+      - api_contract versions consumed by qa-agent and frontend-agent match backend-agent output
+      - frontend routes and selectors needed by qa-agent are present in frontend handoff
+      - qa e2e paths align with frontend handoff when e2e scope is active
+      - mock_policy is honored and stale mocks are reported
+      - blocking issues are resolved or explicitly accepted before final summary

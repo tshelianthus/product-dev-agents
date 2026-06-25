@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/frontend_output.schema.json",
+  "title": "Frontend Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_contract_version_consumed",
+    "components",
+    "api_bindings",
+    "state_plan",
+    "ux_a11y_checks",
+    "component_tests",
+    "handoff",
+    "issues"
+  ],
+  "properties": {
+    "api_contract_version_consumed": {
+      "oneOf": [{ "type": "string" }, { "type": "integer" }]
+    },
+    "components": { "type": "array" },
+    "api_bindings": { "type": "array" },
+    "state_plan": { "type": "object" },
+    "ux_a11y_checks": { "type": "object" },
+    "component_tests": { "type": "array" },
+    "qa_handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["routes", "selectors"],
+      "properties": {
+        "routes": { "type": "array", "items": { "type": "string" } },
+        "selectors": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "mock_usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["used_mocks", "open_todos"],
+      "properties": {
+        "used_mocks": { "type": "boolean" },
+        "open_todos": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "handoff": { "$ref": "common.schema.json#/$defs/handoff" },
+    "issues": { "type": "array", "items": { "$ref": "issue.schema.json" } }
+  }
+}

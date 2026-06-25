@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/backend_input.schema.json",
+  "title": "Backend Agent Input",
+  "$ref": "backend_dispatch.schema.json"
+}

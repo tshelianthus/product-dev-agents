@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/run_output.schema.json",
+  "title": "Product Dev Agents Run Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pm_output", "bus_output"],
+  "properties": {
+    "architect_output": { "$ref": "architect_output.schema.json" },
+    "pm_output": { "$ref": "pm_output.schema.json" },
+    "data_output": { "$ref": "data_output.schema.json" },
+    "backend_output": { "$ref": "backend_output.schema.json" },
+    "frontend_output": { "$ref": "frontend_output.schema.json" },
+    "qa_output": { "$ref": "qa_output.schema.json" },
+    "bus_output": { "$ref": "bus_output.schema.json" }
+  }
+}

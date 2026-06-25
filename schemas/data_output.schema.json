@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/data_output.schema.json",
+  "title": "Data Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["data_contract", "indexes", "migration", "risks", "handoff", "issues"],
+  "properties": {
+    "data_contract": { "$ref": "common.schema.json#/$defs/contract" },
+    "indexes": { "type": "array" },
+    "migration": { "type": "object" },
+    "risks": { "type": "array" },
+    "handoff": { "$ref": "common.schema.json#/$defs/handoff" },
+    "issues": { "type": "array", "items": { "$ref": "issue.schema.json" } }
+  }
+}

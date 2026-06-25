@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/pm_input.schema.json",
+  "title": "PM Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["user_intent"],
+  "properties": {
+    "user_intent": { "type": "string", "minLength": 1 },
+    "project_context": { "$ref": "project_context.schema.json" },
+    "target_agents": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "context_schema_version": { "type": "string" }
+  }
+}

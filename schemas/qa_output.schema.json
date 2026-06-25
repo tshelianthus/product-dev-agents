@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/qa_output.schema.json",
+  "title": "QA Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_contract_version_consumed",
+    "data_contract_version_consumed",
+    "test_cases",
+    "regression_risks",
+    "coverage_report",
+    "perf_plan",
+    "e2e_plan",
+    "handoff",
+    "issues"
+  ],
+  "properties": {
+    "api_contract_version_consumed": {
+      "oneOf": [{ "type": "string" }, { "type": "integer" }]
+    },
+    "data_contract_version_consumed": {
+      "oneOf": [{ "type": "string" }, { "type": "integer" }, { "type": "null" }]
+    },
+    "test_cases": { "type": "array" },
+    "regression_risks": { "type": "array" },
+    "coverage_report": { "type": "object" },
+    "perf_plan": { "type": "object" },
+    "e2e_plan": { "type": "object" },
+    "handoff": { "$ref": "common.schema.json#/$defs/handoff" },
+    "issues": { "type": "array", "items": { "$ref": "issue.schema.json" } }
+  }
+}

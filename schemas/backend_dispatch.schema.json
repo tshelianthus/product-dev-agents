@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/backend_dispatch.schema.json",
+  "title": "Backend Dispatch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_card",
+    "project_context",
+    "data_contract",
+    "security_requirements",
+    "performance_constraints"
+  ],
+  "properties": {
+    "task_card": { "type": "object" },
+    "project_context": { "$ref": "project_context.schema.json" },
+    "data_contract": { "$ref": "common.schema.json#/$defs/contract" },
+    "security_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "require_audit_log", "pii_fields"],
+      "properties": {
+        "level": { "type": "string", "enum": ["strict", "standard"] },
+        "require_audit_log": { "type": "boolean" },
+        "pii_fields": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "performance_constraints": { "type": "object" }
+  }
+}

@@ -1,0 +1,363 @@
+{
+  "pm_output": {
+    "task_card": {
+      "title": "Add saved items"
+    },
+    "plan": {
+      "steps": ["backend", "frontend", "qa"]
+    },
+    "execution_mode_used": "inline",
+    "context_schema_version_used": "1.1",
+    "dispatches": {
+      "backend": {
+        "task_card": {
+          "title": "Add saved items"
+        },
+        "project_context": {
+          "schema_version": "1.1",
+          "tech_stack": {
+            "language": "TypeScript",
+            "backend_framework": "Express",
+            "frontend_framework": "React",
+            "database": "PostgreSQL",
+            "migration_tool": "Prisma",
+            "package_manager": {
+              "backend": "npm",
+              "frontend": "npm"
+            }
+          },
+          "conventions": {
+            "naming": {
+              "api_path_style": "kebab-case",
+              "db_object_style": "snake_case",
+              "component_style": "PascalCase",
+              "error_code_style": "SCREAMING_SNAKE_CASE"
+            },
+            "api": {
+              "version_prefix": "/api/v1",
+              "contract_source": "openapi"
+            },
+            "commit": {
+              "format": "conventional-commits"
+            }
+          },
+          "toolchain": {
+            "lint": {
+              "backend": ["npm run lint:backend"],
+              "frontend": ["npm run lint:frontend"]
+            },
+            "test": {
+              "backend": ["npm run test:backend"],
+              "frontend": ["npm run test:frontend"]
+            },
+            "build": {
+              "backend": ["npm run build:backend"],
+              "frontend": ["npm run build:frontend"]
+            },
+            "typecheck": {
+              "backend": ["npm run typecheck:backend"],
+              "frontend": ["npm run typecheck:frontend"]
+            },
+            "migrate": ["npm run migrate"]
+          },
+          "ci": {
+            "platform": "github-actions",
+            "pipeline_path": ".github/workflows/ci.yml"
+          },
+          "repo": {
+            "layout": {
+              "api": "openapi",
+              "backend": "apps/api",
+              "frontend": "apps/web",
+              "tests": "tests",
+              "migrations": "prisma/migrations"
+            },
+            "api_contract_paths": ["openapi/api.yaml"],
+            "migration_paths": ["prisma/migrations"],
+            "test_paths": ["tests"],
+            "generated_code_policy": "do-not-edit-generated-files"
+          },
+          "runtime": {
+            "auth_model": "session",
+            "tenancy_model": "single-tenant",
+            "environment_policy": "env-example-required",
+            "deployment_target": "container",
+            "observability": "structured-logs",
+            "feature_flag_policy": "none"
+          },
+          "quality_gates": {
+            "required_before_summary": ["lint", "test", "build"]
+          },
+          "issues": []
+        },
+        "data_contract": {
+          "contract_version": "2026-06-17.data.1",
+          "updated_at": "2026-06-17T00:00:00Z"
+        },
+        "security_requirements": {
+          "level": "standard",
+          "require_audit_log": false,
+          "pii_fields": []
+        },
+        "performance_constraints": {}
+      },
+      "frontend": {
+        "task_card": {
+          "title": "Add saved items"
+        },
+        "project_context": {
+          "schema_version": "1.1",
+          "tech_stack": {
+            "language": "TypeScript",
+            "backend_framework": "Express",
+            "frontend_framework": "React",
+            "database": "PostgreSQL",
+            "migration_tool": "Prisma",
+            "package_manager": {
+              "backend": "npm",
+              "frontend": "npm"
+            }
+          },
+          "conventions": {
+            "naming": {
+              "api_path_style": "kebab-case",
+              "db_object_style": "snake_case",
+              "component_style": "PascalCase",
+              "error_code_style": "SCREAMING_SNAKE_CASE"
+            },
+            "api": {
+              "version_prefix": "/api/v1",
+              "contract_source": "openapi"
+            },
+            "commit": {
+              "format": "conventional-commits"
+            }
+          },
+          "toolchain": {
+            "lint": {
+              "backend": ["npm run lint:backend"],
+              "frontend": ["npm run lint:frontend"]
+            },
+            "test": {
+              "backend": ["npm run test:backend"],
+              "frontend": ["npm run test:frontend"]
+            },
+            "build": {
+              "backend": ["npm run build:backend"],
+              "frontend": ["npm run build:frontend"]
+            },
+            "typecheck": {
+              "backend": ["npm run typecheck:backend"],
+              "frontend": ["npm run typecheck:frontend"]
+            },
+            "migrate": ["npm run migrate"]
+          },
+          "ci": {
+            "platform": "github-actions",
+            "pipeline_path": ".github/workflows/ci.yml"
+          },
+          "repo": {
+            "layout": {
+              "api": "openapi",
+              "backend": "apps/api",
+              "frontend": "apps/web",
+              "tests": "tests",
+              "migrations": "prisma/migrations"
+            },
+            "api_contract_paths": ["openapi/api.yaml"],
+            "migration_paths": ["prisma/migrations"],
+            "test_paths": ["tests"],
+            "generated_code_policy": "do-not-edit-generated-files"
+          },
+          "runtime": {
+            "auth_model": "session",
+            "tenancy_model": "single-tenant",
+            "environment_policy": "env-example-required",
+            "deployment_target": "container",
+            "observability": "structured-logs",
+            "feature_flag_policy": "none"
+          },
+          "quality_gates": {
+            "required_before_summary": ["lint", "test", "build"]
+          },
+          "issues": []
+        },
+        "api_contract": {
+          "contract_version": "2026-06-17.1",
+          "updated_at": "2026-06-17T00:00:00Z"
+        },
+        "design_spec": {},
+        "state_constraints": {},
+        "mock_policy": "forbidden"
+      },
+      "qa": {
+        "task_card": {
+          "title": "Add saved items"
+        },
+        "project_context": {
+          "schema_version": "1.1",
+          "tech_stack": {
+            "language": "TypeScript",
+            "backend_framework": "Express",
+            "frontend_framework": "React",
+            "database": "PostgreSQL",
+            "migration_tool": "Prisma",
+            "package_manager": {
+              "backend": "npm",
+              "frontend": "npm"
+            }
+          },
+          "conventions": {
+            "naming": {
+              "api_path_style": "kebab-case",
+              "db_object_style": "snake_case",
+              "component_style": "PascalCase",
+              "error_code_style": "SCREAMING_SNAKE_CASE"
+            },
+            "api": {
+              "version_prefix": "/api/v1",
+              "contract_source": "openapi"
+            },
+            "commit": {
+              "format": "conventional-commits"
+            }
+          },
+          "toolchain": {
+            "lint": {
+              "backend": ["npm run lint:backend"],
+              "frontend": ["npm run lint:frontend"]
+            },
+            "test": {
+              "backend": ["npm run test:backend"],
+              "frontend": ["npm run test:frontend"]
+            },
+            "build": {
+              "backend": ["npm run build:backend"],
+              "frontend": ["npm run build:frontend"]
+            },
+            "typecheck": {
+              "backend": ["npm run typecheck:backend"],
+              "frontend": ["npm run typecheck:frontend"]
+            },
+            "migrate": ["npm run migrate"]
+          },
+          "ci": {
+            "platform": "github-actions",
+            "pipeline_path": ".github/workflows/ci.yml"
+          },
+          "repo": {
+            "layout": {
+              "api": "openapi",
+              "backend": "apps/api",
+              "frontend": "apps/web",
+              "tests": "tests",
+              "migrations": "prisma/migrations"
+            },
+            "api_contract_paths": ["openapi/api.yaml"],
+            "migration_paths": ["prisma/migrations"],
+            "test_paths": ["tests"],
+            "generated_code_policy": "do-not-edit-generated-files"
+          },
+          "runtime": {
+            "auth_model": "session",
+            "tenancy_model": "single-tenant",
+            "environment_policy": "env-example-required",
+            "deployment_target": "container",
+            "observability": "structured-logs",
+            "feature_flag_policy": "none"
+          },
+          "quality_gates": {
+            "required_before_summary": ["lint", "test", "build"]
+          },
+          "issues": []
+        },
+        "api_contract": {
+          "contract_version": "2026-06-17.1",
+          "updated_at": "2026-06-17T00:00:00Z"
+        },
+        "perf_targets": {},
+        "scope": "e2e"
+      }
+    },
+    "summary": "Saved items feature ready for integration.",
+    "handoff": {
+      "next_agent": "product-dev-bus",
+      "required_inputs": []
+    },
+    "issues": []
+  },
+  "backend_output": {
+    "apis": [],
+    "api_contract": {
+      "contract_version": "2026-06-17.1",
+      "updated_at": "2026-06-17T00:00:00Z",
+      "openapi": {}
+    },
+    "security_review": {},
+    "performance_risks": [],
+    "handoff": {
+      "next_agent": "frontend-agent",
+      "required_inputs": ["api_contract"]
+    },
+    "issues": []
+  },
+  "frontend_output": {
+    "api_contract_version_consumed": "2026-06-17.1",
+    "components": [],
+    "api_bindings": [],
+    "state_plan": {},
+    "ux_a11y_checks": {},
+    "component_tests": [],
+    "qa_handoff": {
+      "routes": ["/saved-items"],
+      "selectors": ["[data-testid='saved-items-list']"]
+    },
+    "mock_usage": {
+      "used_mocks": false,
+      "open_todos": []
+    },
+    "handoff": {
+      "next_agent": "qa-agent",
+      "required_inputs": ["routes", "selectors"]
+    },
+    "issues": []
+  },
+  "qa_output": {
+    "api_contract_version_consumed": "2026-06-17.1",
+    "data_contract_version_consumed": null,
+    "test_cases": [],
+    "regression_risks": [],
+    "coverage_report": {},
+    "perf_plan": {},
+    "e2e_plan": {},
+    "handoff": {
+      "next_agent": "product-dev-bus",
+      "required_inputs": []
+    },
+    "issues": []
+  },
+  "bus_output": {
+    "context_schema_version": "1.1",
+    "execution_mode_used": "inline",
+    "scene_detected": "new-feature",
+    "agents_activated": ["pm-agent", "backend-agent", "frontend-agent", "qa-agent"],
+    "agents_skipped": [],
+    "final_summary": "Saved items feature ready for integration.",
+    "pm_summary_ref": "pm_output.summary",
+    "artifacts": [],
+    "handoff": {
+      "next_agent": "user",
+      "required_inputs": []
+    },
+    "run_state": {
+      "status": "completed",
+      "agent_states": {
+        "pm-agent": "completed",
+        "backend-agent": "completed",
+        "frontend-agent": "completed",
+        "qa-agent": "completed"
+      }
+    },
+    "issues": []
+  }
+}

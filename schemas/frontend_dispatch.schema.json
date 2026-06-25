@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/frontend_dispatch.schema.json",
+  "title": "Frontend Dispatch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_card",
+    "project_context",
+    "api_contract",
+    "design_spec",
+    "state_constraints",
+    "mock_policy"
+  ],
+  "properties": {
+    "task_card": { "type": "object" },
+    "project_context": { "$ref": "project_context.schema.json" },
+    "api_contract": { "$ref": "common.schema.json#/$defs/contract" },
+    "design_spec": { "type": "object" },
+    "state_constraints": { "type": "object" },
+    "mock_policy": { "type": "string", "enum": ["forbidden", "allowed-with-todo"] }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-dev-agents.local/schemas/architect_output.schema.json",
+  "title": "Architect Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_context_status",
+    "project_context_path",
+    "context_schema_version",
+    "initialized_artifacts",
+    "handoff",
+    "issues"
+  ],
+  "properties": {
+    "project_context_status": {
+      "type": "string",
+      "enum": ["created", "updated", "unchanged", "failed"]
+    },
+    "project_context_path": { "type": "string", "minLength": 1 },
+    "context_schema_version": { "type": "string" },
+    "initialized_artifacts": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/artifact" }
+    },
+    "handoff": { "$ref": "common.schema.json#/$defs/handoff" },
+    "issues": {
+      "type": "array",
+      "items": { "$ref": "issue.schema.json" }
+    }
+  }
+}
