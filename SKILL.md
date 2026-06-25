@@ -1,6 +1,6 @@
 ---
 name: product-dev-agents
-description: A product development multi-agent orchestration suite, used for cross-layer product development, requirements with unclear ownership, work requiring coordination among architect/pm/data/backend/qa/frontend, or when the user explicitly requests product-dev agents orchestration. Supports Inline (default) and optional Subagent modes; single-layer database, backend, frontend, QA, or code explanation tasks should directly use the corresponding professional Agent rather than triggering the bus.
+description: A Codex skill bundle for product development orchestration. Supports Inline (default) and optional Subagent modes for coordinating cross-layer workflows (architect, pm, data, backend, qa, frontend).
 ---
 
 # Product Dev Agents — Orchestration Bus
@@ -9,9 +9,9 @@ description: A product development multi-agent orchestration suite, used for cro
 
 This skill is the orchestration bus. It classifies product-development intent, chooses the first responsible skill, enforces execution mode and dependency order, and returns `bus_output`.
 
-It does not replace professional agents. Product planning, task breakdown, skip decisions, summary, and conflict arbitration belong to [`pm-agent/SKILL.md`](pm-agent/SKILL.md).
+It does not replace professional skills. Product planning, task breakdown, skip decisions, summary, and conflict arbitration belong to [`pm-agent/SKILL.md`](pm-agent/SKILL.md).
 
-Do not use the bus for single-file edits, code explanations, direct calls to a named agent, or tasks that clearly belong to one layer only.
+Do not use the bus for single-file edits, code explanations, direct calls to a named skill, or tasks that clearly belong to one layer only.
 
 ## Must-Read References
 
@@ -36,17 +36,17 @@ Do not start dependent work in the same batch. Only `qa-agent` and `frontend-age
 
 ## Skill Map
 
-| Skill | Role |
-|-------|------|
-| [`architect-agent/SKILL.md`](architect-agent/SKILL.md) | One-time project initialization and project context file creation |
-| [`pm-agent/SKILL.md`](pm-agent/SKILL.md) | Daily entry, task breakdown, routing, summary, conflict arbitration |
-| [`data-agent/SKILL.md`](data-agent/SKILL.md) | Data structures, migrations, indexes, data contract |
-| [`backend-agent/SKILL.md`](backend-agent/SKILL.md) | API design, backend logic, security review, API contract |
-| [`qa-agent/SKILL.md`](qa-agent/SKILL.md) | Test planning, regression risk, coverage, E2E/performance planning |
-| [`frontend-agent/SKILL.md`](frontend-agent/SKILL.md) | UI, API binding, state, errors, accessibility, component tests |
-| [`guardrails/github-safety/SKILL.md`](guardrails/github-safety/SKILL.md) | Git/GitHub safety rules |
-| [`guardrails/backend-security/SKILL.md`](guardrails/backend-security/SKILL.md) | Backend security guardrails |
-| [`guardrails/api-contract-principles/SKILL.md`](guardrails/api-contract-principles/SKILL.md) | API contract guardrails |
+| Skill |
+|-------|
+| [`architect-agent/SKILL.md`](architect-agent/SKILL.md) |
+| [`pm-agent/SKILL.md`](pm-agent/SKILL.md) |
+| [`data-agent/SKILL.md`](data-agent/SKILL.md) |
+| [`backend-agent/SKILL.md`](backend-agent/SKILL.md) |
+| [`qa-agent/SKILL.md`](qa-agent/SKILL.md) |
+| [`frontend-agent/SKILL.md`](frontend-agent/SKILL.md) |
+| [`guardrails/github-safety/SKILL.md`](guardrails/github-safety/SKILL.md) |
+| [`guardrails/backend-security/SKILL.md`](guardrails/backend-security/SKILL.md) |
+| [`guardrails/api-contract-principles/SKILL.md`](guardrails/api-contract-principles/SKILL.md) |
 
 ## Routing
 

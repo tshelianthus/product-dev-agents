@@ -1,31 +1,32 @@
 # Product Dev Agents
 
-Product Dev Agents is a contract-driven Codex skill bundle for orchestrating product-development workflows across PM, data, backend, frontend, QA, and project-initialization agents. It keeps a six-agent delivery contract plus orchestration and guardrails while adding v2 dual-mode execution:
+Product Dev Agents is a contract-driven Codex skill bundle designed specifically as a set of skill files for Codex (a specific AI programming environment). Unlike general-purpose multi-agent frameworks (such as AutoGen or CrewAI) that can be independently deployed and extended, this project is a narrow-scope skill bundle meant to orchestrate workflows within a Codex session.
 
-- **Default Inline**: read each agent's `SKILL.md` in the current session. This works in environments without Subagent or Task support.
+It supports dual-mode execution for Codex:
+- **Default Inline**: read each skill's `SKILL.md` in the current session. This works in environments without Subagent or Task support.
 - **Optional Subagent**: pass `execution_mode: subagent` to run eligible layers as Task subagents. If Task is unavailable, the bus records `TOOL_UNAVAILABLE`, falls back to Inline, and sets `bus_output.execution_mode_used: inline-fallback`.
 
 ## Repository Layout
 
 ```text
 .
-├── SKILL.md                  # product-dev orchestration bus
-├── architect-agent/SKILL.md  # one-time project initialization
-├── pm-agent/SKILL.md         # daily product coordination and arbitration
-├── data-agent/SKILL.md       # schema, migrations, data contracts
-├── backend-agent/SKILL.md    # API design, business logic, OpenAPI contracts
-├── qa-agent/SKILL.md         # tests, regression, E2E and performance planning
-├── frontend-agent/SKILL.md   # UI implementation and API binding
-├── guardrails/               # cross-cutting rules, not delivery agents
+├── SKILL.md                  # Orchestration bus skill
+├── architect-agent/SKILL.md
+├── pm-agent/SKILL.md
+├── data-agent/SKILL.md
+├── backend-agent/SKILL.md
+├── qa-agent/SKILL.md
+├── frontend-agent/SKILL.md
+├── guardrails/               # Guardrail skills
 │   ├── github-safety/SKILL.md
 │   ├── backend-security/SKILL.md
 │   └── api-contract-principles/SKILL.md
-├── references/contracts.md    # contract index and loading map
-├── references/*.md            # handoff, context schema, output, issue contracts
-├── schemas/*.schema.json       # machine-readable output, issue, and context schemas
-├── agents.yaml                 # authoritative agent registry and dependency map
-├── project-context.md        # template for the project context file
-└── subagent-orchestration.md # optional Task prompt templates
+├── references/contracts.md   # Contract loading index
+├── references/*.md           # Handoff, context, output, and issue contracts
+├── schemas/*.schema.json     # Schema definitions
+├── agents.yaml               # Agent registry and dependency map
+├── project-context.md        # Context template
+└── subagent-orchestration.md # Optional task templates
 ```
 
 ## Orchestration Contract
