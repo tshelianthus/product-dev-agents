@@ -53,34 +53,79 @@ The execution mode does not change the contract:
 
 ```mermaid
 flowchart TD
-    U[User intent] --> B[product-dev-agents]
-    B --> M{execution_mode}
-    M -->|inline default| I[Read target SKILL.md files in current session]
-    M -->|subagent requested| S{Task available?}
-    S -->|yes| T[Run eligible layers as Task subagents]
-    S -->|no| F[Record TOOL_UNAVAILABLE and use inline-fallback]
+    %% ── Entry ──────────────────────────────────────────────────
+    U(["👤 User Intent"]):::entry --> B["🚌 product-dev-agents\nOrchestration Bus"]:::bus
 
-    I --> PM[pm-agent: route, break down, arbitrate]
-    T --> PM
-    F --> PM
+    %% ── Execution Mode Branch ───────────────────────────────────
+    B --> M{{"execution_mode?"}}:::decision
+    M -->|"inline (default)"| PM
+    M -->|"subagent requested"| TA{{"Task tool\navailable?"}}:::decision
+    TA -->|yes| PM
+    TA -->|no| FB["⚠️ Record TOOL_UNAVAILABLE\nFallback → inline"]:::warn
+    FB --> PM
 
-    PM --> D[data-agent: data contract]
-    D --> BE[backend-agent: API and business logic]
-    BE --> C{consumable api_contract?}
-    C -->|yes| QA[qa-agent: test and regression plan]
-    C -->|yes| FE[frontend-agent: UI and API binding]
-    C -->|no| X[Stop downstream work]
+    %% ── Phase 1: PM ─────────────────────────────────────────────
+    subgraph PHASE1["Phase 1 · Planning"]
+        direction TB
+        PM["🗂 pm-agent\nRoute · Break down · Arbitrate"]:::agent
+        PM --> TC["task_card\n+ dispatches"]:::artifact
+    end
 
-    QA --> O[bus_output]
-    FE --> O
-    X --> O
+    %% ── Phase 2: Data ───────────────────────────────────────────
+    TC --> DA
+    subgraph PHASE2["Phase 2 · Data"]
+        direction TB
+        DA["🗄 data-agent\nSchemas · Migrations · Indexes"]:::agent
+        DA --> DC["data_contract"]:::artifact
+    end
 
-    G[Guardrails and references] -.-> B
-    G -.-> PM
-    G -.-> D
-    G -.-> BE
-    G -.-> QA
-    G -.-> FE
+    %% ── Phase 3: Backend ────────────────────────────────────────
+    DC --> BA
+    TC --> BA
+    subgraph PHASE3["Phase 3 · Backend"]
+        direction TB
+        BA["⚙️ backend-agent\nAPI Design · Business Logic · Security"]:::agent
+        BA --> AC["api_contract\n(OpenAPI)"]:::artifact
+    end
+
+    %% ── Phase 4: Parallel QA + Frontend ─────────────────────────
+    AC --> GATE{{"consumable\napi_contract?"}}:::decision
+    GATE -->|no| STOP["🛑 Stop downstream\nblock: true issue"]:::stop
+    GATE -->|yes| QA & FE
+
+    subgraph PHASE4["Phase 4 · Parallel"]
+        direction LR
+        QA["🧪 qa-agent\nTests · Regression\nE2E · Performance"]:::agent
+        FE["🖥 frontend-agent\nUI · API Binding\nState · Accessibility"]:::agent
+    end
+
+    %% ── Integration Check ───────────────────────────────────────
+    QA & FE --> IC["🔗 Integration Check\n• contract versions match\n• routes & selectors aligned\n• mock_policy honored"]:::check
+
+    %% ── Output ──────────────────────────────────────────────────
+    IC --> OUT(["📦 bus_output"]):::output
+    STOP --> OUT
+
+    %% ── Guardrails (cross-cutting) ───────────────────────────────
+    subgraph GR["🛡 Guardrails  (read before relevant operations)"]
+        direction LR
+        GH["github-safety"]:::guard
+        BS["backend-security"]:::guard
+        AP["api-contract-principles"]:::guard
+    end
+    GR -. "enforced at" .-> B & PM & DA & BA & QA & FE
+
+    %% ── Styles ──────────────────────────────────────────────────
+    classDef entry    fill:#6366f1,stroke:#4f46e5,color:#fff,rx:20
+    classDef bus      fill:#0f172a,stroke:#6366f1,color:#e2e8f0,font-weight:bold
+    classDef decision fill:#1e293b,stroke:#94a3b8,color:#e2e8f0
+    classDef agent    fill:#0e7490,stroke:#0891b2,color:#fff
+    classDef artifact fill:#134e4a,stroke:#0d9488,color:#d1fae5,shape:parallelogram
+    classDef guard    fill:#3b0764,stroke:#7c3aed,color:#ede9fe
+    classDef check    fill:#92400e,stroke:#d97706,color:#fef3c7
+    classDef output   fill:#166534,stroke:#22c55e,color:#dcfce7,rx:20
+    classDef stop     fill:#7f1d1d,stroke:#ef4444,color:#fee2e2
+    classDef warn     fill:#78350f,stroke:#f59e0b,color:#fef3c7
 ```
 
 ## Usage
